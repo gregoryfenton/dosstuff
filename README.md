@@ -1,26 +1,32 @@
-# VGA Text Mode Smooth Rolling Copper Bars
+# DOS Programming & Demoscene Archive
 
-A 16-bit real-mode x86 assembly demoscene intro featuring smooth raster copper bars and a horizontally scrolling text line running in standard VGA text mode. Designed for MASM and optimised for modern emulators like DOSBox-Staging.
+Welcome to my personal repository dedicated to 16-bit MS-DOS programming, real-mode x86 assembly, and classic demoscene effects. This collection serves as a technical playground and historical archive for low-level hardware interaction, custom screen modes, raster timing tricks, and retro software engineering.
 
-## Video Demonstration
+## Overview
 
-[![Watch the demo on YouTube](https://img.youtube.com/vi/W2slMkVjct0/0.jpg)](https://www.youtube.com/watch?v=W2slMkVjct0)
+Programming for vintage MS-DOS environments forces a return to bare-metal principles - direct memory access, precise I/O port manipulation, and strict adherence to hardware cycles. Rather than relying on modern abstractions or heavy graphics frameworks, the projects housed here interact directly with the underlying hardware architecture of the IBM PC compatible.
 
-## Features
+Whether exploring standard 80x25 text mode visual tricks or fine-tuning scanline synchronisation, this archive captures the creative engineering spirit of classic demoscene productions implemented with modern toolchains.
 
-- **Raster Copper Bars:** Three independent 60-scanline triangular colour bars (Silvery Grey, Gold, and Emerald Green) moving at distinct velocities with full screen wrapping.
-- **Smooth Horizontal Scroller:** A custom text message scrolling smoothly across row 12 at a comfortable, readable pace via frame-rate throttling.
-- **Strict Raster Timing:** Synchronised precisely to vertical and horizontal retraces (`03DAh`) to completely eliminate screen tearing and jitter.
-- **Pure Text Mode:** Operates entirely within standard 80x25 text mode (`0003h`), dynamically updating the DAC palette registers (`03C8h`/`03C9h`) per scanline while leaving text characters and attributes crisp and untouched.
+## Core Focus Areas
 
-## Requirements
+* **Raster & Palette Manipulation:** Harnessing the VGA Digital-to-Analogue Converter (DAC) registers (`03C8h` and `03C9h`) to produce smooth gradient copper bars, split-screen colour shifts, and custom palettes without leaving text mode.
+* **Timing & Synchronisation:** Eliminating screen tearing and jitter by locking application logic strictly to vertical and horizontal retrace intervals (`03DAh`).
+* **Optimised Assembly:** Crafting compact, fast-executing 16-bit `.COM` binaries using MASM and compatible assemblers with `.MODEL TINY` memory models.
+* **Retro UI & Scrollers:** Implementing efficient text-buffer shifts, character-based horizontal scrollers, and custom message rendering routines.
 
-- **Assembler:** Microsoft Macro Assembler (MASM) or a compatible clone (such as JWASM).
-- **Environment:** DOSBox-Staging, DOSBox-X, or vintage MS-DOS hardware.
+## Recommended Toolchain & Environment
 
-## Building the Project
+To build and run the projects in this archive successfully, a standard 16-bit assembler and a reliable emulator are required:
 
-To assemble the source code into a tiny `.com` executable using MASM, run the following command in your build environment:
+* **Assembler:** Microsoft Macro Assembler (MASM) or JWASM.
+* **Emulator:** DOSBox-Staging or DOSBox-X (configured with high cycle counts or max settings to test performance ceilings).
 
-```bash
-ml /AT rainbow.asm
+## Repository Structure
+
+* `rainbow/` - A smooth-scrolling text mode copper bar effect featuring silvery grey, gold, and emerald green raster bars synchronised to 60Hz.
+* *(Additional projects and utilities will be added here as the archive expands)*
+
+## Author
+
+Gregory Fenton (M0ODZ)
