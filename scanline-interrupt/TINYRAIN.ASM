@@ -71,7 +71,7 @@ RASTER_VECTOR    EQU 060h
 
 DAC_INDEX        EQU 03C8h
 DAC_DATA         EQU 03C9h
-DAC_COLOUR       EQU 7
+DAC_COLOUR       EQU 0
 
 VISIBLE_LINES    EQU 400
 
@@ -83,6 +83,14 @@ START:
         mov     ax,cs
         mov     ds,ax
 
+        ; -------------------------------------------------------------
+        ; VGA text mode 03h.
+        ; Invokes BIOS video service to switch into standard 80x25 text mode
+        ; with a 400-line vertical active display structure.
+        ; -------------------------------------------------------------
+
+        mov     ax,0003h
+        int     10h
         ; -------------------------------------------------------------
         ; Dynamically format DAC_COLOUR into the startup message string.
         ; Converts the byte value into a 2-character hexadecimal representation.
@@ -117,15 +125,6 @@ START:
         mov     dx,OFFSET MsgVector
         call    PrintString
 
-        ; -------------------------------------------------------------
-        ; VGA text mode 03h.
-        ; Invokes BIOS video service to switch into standard 80x25 text mode
-        ; with a 400-line vertical active display structure.
-        ; -------------------------------------------------------------
-
-        mov     ax,0003h
-        int     10h
-
         mov     dx,OFFSET MsgMode
         call    PrintString
 
@@ -151,7 +150,7 @@ START:
 
         ; -------------------------------------------------------------
         ; Install INT 60h.
-        ; CLI/STI bracket the vector replacement to prevent race conditions 
+        ; CLI/STI bracket the vector replacement to prevent race conditions
         ; during hardware or software interrupt dispatching.
         ; -------------------------------------------------------------
 
@@ -287,7 +286,7 @@ ExitProgram:
 
         ; -------------------------------------------------------------
         ; Disable synthetic raster:
-        ; Writing target = 0000h via port 0x62 clears the enabled flag 
+        ; Writing target = 0000h via port 0x62 clears the enabled flag
         ; inside the emulator state machine.
         ; -------------------------------------------------------------
 
@@ -741,7 +740,7 @@ LUTNext:
 
         ret
 
-BuildLUTEndP
+BuildLUT ENDP
 
 
 ; =====================================================================
